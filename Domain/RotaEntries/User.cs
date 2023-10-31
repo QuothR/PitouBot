@@ -1,3 +1,3 @@
-﻿namespace Domain.Models;
+﻿namespace Domain.RotaEntries;
 
 public record User(string Name);
