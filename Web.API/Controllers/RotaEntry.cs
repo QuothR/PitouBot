@@ -21,8 +21,16 @@ public class RotaEntry
     [HttpGet]
     public async Task<IResult> GetRotaEntry([FromQuery] Guid id)
     {
-        var entry = await _sender.Send(new GetRotaEntryQuery(id));
-        return Results.Ok(entry);
+        try
+        {
+            var entry = await _sender.Send(new GetRotaEntryQuery(id));
+            return Results.Ok(entry);
+        }
+        catch (RotaEntryNotFoundException e)
+        {
+            return Results.NotFound(e.Message);
+        }
+
     }
         
     [HttpPost]
